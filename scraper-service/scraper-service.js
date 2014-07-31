@@ -14,7 +14,7 @@ var actions = {
         var items = [];
 
         scrapingData[id] = {
-            state: "not-ready",
+            ready: false,
             items: items
         };
 
@@ -36,7 +36,7 @@ var actions = {
                 });
 
 
-                scrapingData[id].state = "ready";
+                scrapingData[id].ready = true;
             }
         });
 
