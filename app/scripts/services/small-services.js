@@ -7,10 +7,12 @@ guestyServices.factory("scraperService", function ($http, $q, $timeout) {
 
     var scraperResource = "http://localhost:8081/scrape/start/";
 
-    function getReadyData(link, defer) {
+    function getReadyData(link, defer, postProccess) {
+        postProccess = postProccess || function(a) {return a};
+
         $http.get(link).success(function (result) {
             if (result.ready) {
-                defer.resolve(result.items);
+                defer.resolve(postProccess(result));
             } else {
                 $timeout(function () {
                     getReadyData(link, defer);

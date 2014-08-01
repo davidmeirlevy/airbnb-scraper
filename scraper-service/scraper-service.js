@@ -32,12 +32,24 @@ var scraper = function(port) {
                         reviews = reviews[reviews.indexOf("reviews") - 1]; //the word that appears before the word "reviews" is the number of reviews..
 
                         items.push({
+                            id: index,
                             name: $row.attr("data-name"),
                             user: $row.attr("data-user"),
                             price: $row.find(".price-amount").text(),
-                            reviews: parseInt(reviews)
+                            reviews: parseInt(reviews),
+                            geo: {
+                                latitude: parseFloat($row.attr("data-lat")),
+                                longitude: parseFloat($row.attr("data-lng"))
+                            }
                         });
                     });
+
+                    var mapData = JSON.parse($(".map-search").attr("data-bootstrap-data"));
+
+                    scrapingData[id].geo = {
+                        latitude: mapData['center_lat'] || 0,
+                        longitude: mapData['center_lng'] || 0
+                    };
 
 
                     scrapingData[id].ready = true;

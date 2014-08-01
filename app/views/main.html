@@ -1,8 +1,20 @@
 <div>
-    <p><label>Enter Zip Code:</label><input text="text" ng-model="zipCode" ng-enter="search()"><button class="btn-submit" ng-click="search();">Search Places!</button></p>
+    <p><label>Enter Zip Code:</label><input text="text" ng-model="zipCode" ng-enter="search()">
+        <button class="btn-submit" ng-click="search();">Search Places!</button>
+    </p>
     <ng-switch on="flags.stage">
         <div ng-switch-when="0"></div>
         <div ng-switch-when="1">Please Wait!!</div>
-        <div ng-switch-when="2" class="gridStyle" ng-grid="gridOptions"></div>
+        <div ng-switch-when="2">
+            <div class="gridStyle" ng-grid="gridOptions"></div>
+
+            <google-map center="map.geo" zoom="map.zoom">
+
+                <markers models="myData" icon="map.icon" coords="'geo'"></markers>
+
+            </google-map>
+        </div>
+
     </ng-switch>
+
 </div>

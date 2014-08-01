@@ -18,6 +18,12 @@ angular.module('guestyApp')
             search: function() {
                 search();
             },
+            map: {
+                geo: {
+                },
+                icon: 'http://icons.iconarchive.com/icons/icons-land/vista-map-markers/32/Map-Marker-Marker-Outside-Pink-icon.png',
+                zoom: 15
+            },
             gridOptions: {
                 columnDefs: [
                     {
@@ -49,8 +55,9 @@ angular.module('guestyApp')
 
         function search(zipCode) {
             $scope.flags.stage = 1;
-            scraperService.getPlaces(zipCode || $scope.zipCode).then(function (items) {
-                $scope.myData = items;
+            scraperService.getPlaces(zipCode || $scope.zipCode).then(function (result) {
+                $scope.myData = result.items;
+                $scope.map.geo = result.geo;
                 $scope.flags.stage = 2;
             });
         }

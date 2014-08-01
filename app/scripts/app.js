@@ -17,6 +17,7 @@ angular
         'ngSanitize',
         'ngTouch',
         'ngGrid',
+        'google-maps',
         'guesty.services'
     ])
     .config(function ($routeProvider) {
