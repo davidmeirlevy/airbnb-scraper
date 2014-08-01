@@ -8,14 +8,51 @@
  * Controller of the guestyApp
  */
 angular.module('guestyApp')
-  .controller('MainCtrl', function ($scope) {
+    .controller('MainCtrl', function ($scope, scraperService) {
 
-        $scope.myData = [{name: "Moroni", age: 50},
-            {name: "Tiancum", age: 43},
-            {name: "Jacob", age: 27},
-            {name: "Nephi", age: 29},
-            {name: "Enos", age: 34}];
-        $scope.gridOptions = { data: 'myData' };
+        angular.extend($scope, {
+            flags: {
+                stage: 0
+            },
+            zipCode: 94108,
+            search: function() {
+                search();
+            },
+            gridOptions: {
+                columnDefs: [
+                    {
+                        field: "name",
+                        displayName: "Property Name",
+                        groupable: false
+                    },
+                    {
+                        field: "user",
+                        displayName: "Property Owner",
+                        groupable: true
+                    },
+                    {
+                        field: "price",
+                        displayName: "Price",
+                        groupable: false
+                    },
+                    {
+                        field: "reviews",
+                        displayName: "Number of Reviews",
+                        groupable: false
+                    },
 
+                ],
+                data: 'myData',
+                showGroupPanel: true
+            }
+        });
 
-  });
+        function search(zipCode) {
+            $scope.flags.stage = 1;
+            scraperService.getPlaces(zipCode || $scope.zipCode).then(function (items) {
+                $scope.myData = items;
+                $scope.flags.stage = 2;
+            });
+        }
+
+    });

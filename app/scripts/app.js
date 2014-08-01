@@ -9,23 +9,23 @@
  * Main module of the application.
  */
 angular
-  .module('guestyApp', [
-    'ngAnimate',
-    'ngCookies',
-    'ngResource',
-    'ngRoute',
-    'ngSanitize',
-    'ngTouch',
+    .module('guestyApp', [
+        'ngAnimate',
+        'ngCookies',
+        'ngResource',
+        'ngRoute',
+        'ngSanitize',
+        'ngTouch',
         'ngGrid',
         'guesty.services'
-  ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });
+    ])
+    .config(function ($routeProvider) {
+        $routeProvider
+            .when('/', {
+                templateUrl: 'views/main.html',
+                controller: 'MainCtrl'
+            })
+            .otherwise({
+                redirectTo: '/'
+            });
+    });
